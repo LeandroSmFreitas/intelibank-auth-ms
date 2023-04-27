@@ -1,0 +1,104 @@
+import java.time.format.DateTimeFormatter
+
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.10'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id "org.liquibase.gradle" version "2.0.2"
+}
+
+group = 'br.com.intelibank'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+//if (!project.hasProperty("runList")) {
+//	project.ext.runList = "main"
+//}
+//
+String descricao = "changelog";
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+String dataHoraAtual = LocalDateTime.now().format(formatter);
+String nomeArquivo = dataHoraAtual + "_" + descricao + ".xml";
+//
+//liquibase {
+//	activities {
+//		main {
+//			driver "com.mysql.cj.jdbc.Driver"
+//			url "jdbc:mysql://localhost:3306/intelibank-mysql-1"
+//			username "intelibank"
+//			password "intelibank"
+//			changeLogFile "src/main/resources/liquibase/master.xml"
+//			defaultSchemaName "intelibank"
+//			logLevel "debug"
+//			classpath "src/main/resources/"
+//		}
+//		diffLog {
+//			driver "com.mysql.cj.jdbc.Driver"
+//			url "jdbc:mysql://localhost:3306/intelibank-mysql-1"
+//			username "intelibank"
+//			password "intelibank"
+//			changeLogFile project.ext.diffChangelogFile
+//			referenceUrl "hibernate:spring:br.com.intelibank.domain?dialect=org.hibernate.dialect.MySQL8Dialect&hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy"
+//			defaultSchemaName "intelibank"
+//			logLevel "debug"
+//			classpath "$buildDir/classes/java/main"
+//		}
+//	}
+//
+//	runList = project.ext.runList
+//}
+
+liquibase {
+	activities {
+		diff {
+			liquibaseTask {
+				referenceUrl = 'hibernate:spring:br.com.intelibank.domain?dialect=org.hibernate.dialect.MySQL5Dialect'
+				referenceDriver = 'com.mysql.jdbc.Driver'
+				referenceUsername = 'intelibank'
+				referencePassword = 'intelibank'
+				url = 'jdbc:mysql://localhost:3306/intelibank'
+				driver = 'com.mysql.jdbc.Driver'
+				username = 'intelibank'
+				password = 'intelibank'
+				diffChangeLogFile = 'src/main/resources/liquibase/changelog/' + nomeArquivo
+				command = 'diffChangeLog'
+			}
+		}
+	}
+}
+
+task liquibaseGenerateChangelog(type: JavaExec) {
+	classpath = sourceSets.main.runtimeClasspath
+	main = 'liquibase.integration.commandline.Main'
+	args '--changeLogFile=src/main/resources/liquibase/changelog/' + nomeArquivo, '--defaultsFile=liquibase.properties', 'generateChangeLog'}
+
+tasks.generateChangelog.dependsOn processResources
+
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation "org.liquibase:liquibase-core"
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+
