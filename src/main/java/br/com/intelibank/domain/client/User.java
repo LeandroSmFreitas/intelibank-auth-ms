@@ -1,5 +1,6 @@
-package br.com.intelibank.domain;
+package br.com.intelibank.domain.client;
 
+import br.com.intelibank.domain.AbstractAuditingEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -27,16 +28,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(length = 50, nullable = false)
-    @NotBlank
-    private String login;
-
     @JsonIgnore
     @NotNull
-    @Size(min = 60, max = 60)
-    @Column(name = "password_hash", length = 60, nullable = false)
+    @Column(name = "password_hash", nullable = false)
     private String password;
 
     @Column(name = "name")
@@ -56,13 +50,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @Builder.Default
     @Column(nullable = false, name = "email_verified")
-    @NotBlank
     private Boolean emailVerified = false;
 
     @Size(max = 20)
     @Column(name = "email_verification_key", length = 20)
     @JsonIgnore
-    @NotBlank
     private String emailVerificationKey;
 
     @Size(max = 256)
@@ -71,14 +63,12 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private String imageUrl;
 
     @Size(max = 20)
-    @Column(name = "activation_key", length = 20)
-    @JsonIgnore
-    @NotBlank
-    private String activationKey;
-
-    @Size(max = 20)
     @Column(name = "reset_key", length = 20)
     @JsonIgnore
     private String resetKey;
+
+    @Column(name = "keycloak_id")
+    @JsonIgnore
+    private String keycloakId;
 
 }

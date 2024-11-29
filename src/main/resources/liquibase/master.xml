@@ -16,4 +16,6 @@
 
 
     <include file="liquibase/changelog/27-01-changelog.xml" />
+    <include file="liquibase/changelog/create-financing-table-changelog.xml" />
+    <include file="liquibase/changelog/create-keycloak-id-in-table-users-changelog.xml" />
 </databaseChangeLog>

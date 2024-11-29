@@ -1,4 +1,4 @@
-package br.com.intelibank.domain;
+package br.com.intelibank.domain.client;
 
 import br.com.intelibank.domain.enumaration.AttachmentType;
 import lombok.*;

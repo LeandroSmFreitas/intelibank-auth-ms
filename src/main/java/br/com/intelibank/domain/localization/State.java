@@ -1,4 +1,4 @@
-package br.com.intelibank.domain;
+package br.com.intelibank.domain.localization;
 
 import lombok.*;
 import org.hibernate.annotations.Cache;
@@ -7,6 +7,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "state")
@@ -34,4 +35,7 @@ public class State implements Serializable {
     @JoinColumn
     @ManyToOne(optional = false)
     private Country country;
+
+    @OneToMany(mappedBy = "state")
+    List<City> cities;
 }

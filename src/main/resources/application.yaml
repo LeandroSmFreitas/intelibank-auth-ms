@@ -1,0 +1,7 @@
+keycloak:
+  server-url: http://localhost:8080
+  realm: intelibank
+  client-id: intelibank-auth
+  username: admin
+  password: admin
+  client-secret: 65Ixa4g6ltH6yhRwpbxkiGjpinGkFL8n

@@ -1,15 +1,15 @@
-package br.com.intelibank.domain;
+package br.com.intelibank.domain.localization;
 
 import lombok.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
-@Table(name = "city")
+@Table(name = "country")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @ToString
 @EqualsAndHashCode
@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Builder(toBuilder = true)
 @Getter
 @Setter
-public class City implements Serializable {
+public class Country implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,8 +27,12 @@ public class City implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @NotNull
-    @JoinColumn
-    @ManyToOne(optional = false)
-    private State state;
+    @Column(name = "acronym")
+    private String acronym;
+
+    @Column(name = "nationality")
+    private String nationality;
+
+    @OneToMany(mappedBy = "country")
+    List<State> states;
 }

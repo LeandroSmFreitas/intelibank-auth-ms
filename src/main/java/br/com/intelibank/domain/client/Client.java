@@ -1,4 +1,4 @@
-package br.com.intelibank.domain;
+package br.com.intelibank.domain.client;
 
 import lombok.*;
 import org.hibernate.annotations.Cache;
@@ -45,27 +45,14 @@ public class Client implements Serializable {
     @Column(name = "phone")
     @NotBlank
     private String phone;
-
-    @Column(name = "registration_key")
-    @NotBlank
-    private String registrationKey;
-
-    @Column(name = "is_active")
-    @Builder.Default
-    @EqualsAndHashCode.Include
-    @ToString.Include
-    @NotBlank
-    private Boolean isActive = true;
-    @Builder.Default
-    @Column(name = "is_verified")
-    @NotBlank
-    private Boolean isVerified = true;
     @OneToOne
     private User user;
     @OneToOne
     private Account account;
     @OneToOne
     private Address address;
+    @OneToOne
+    private Financing financing;
     @Builder.Default
     @OneToMany(mappedBy = "client")
     private Set<Attachment> attachments = new HashSet<>();

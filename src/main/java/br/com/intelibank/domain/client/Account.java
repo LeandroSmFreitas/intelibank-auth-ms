@@ -1,4 +1,4 @@
-package br.com.intelibank.domain;
+package br.com.intelibank.domain.client;
 
 import lombok.*;
 import org.hibernate.annotations.Cache;

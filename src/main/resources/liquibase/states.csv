@@ -1,0 +1,28 @@
+id;name;acronym;country_id
+1;Acre;AC;55
+2;Alagoas;AL;55
+3;Amazonas;AM;55
+4;Amapá;AP;55
+5;Bahia;BA;55
+6;Ceará;CE;55
+7;Distrito Federal;DF;55
+8;Espírito Santo;ES;55
+9;Goiás;GO;55
+10;Maranhão;MA;55
+11;Minas Gerais;MG;55
+12;Mato Grosso do Sul;MS;55
+13;Mato Grosso;MT;55
+14;Pará;PA;55
+15;Paraíba;PB;55
+16;Pernambuco;PE;55
+17;Piauí;PI;55
+18;Paraná;PR;55
+19;Rio de Janeiro;RJ;55
+20;Rio Grande do Norte;RN;55
+21;Rondônia;RO;55
+22;Roraima;RR;55
+23;Rio Grande do Sul;RS;55
+24;Santa Catarina;SC;55
+25;Sergipe;SE;55
+26;São Paulo;SP;55
+27;Tocantins;TO;55
