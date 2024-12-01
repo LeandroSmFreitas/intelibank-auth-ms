@@ -5,3 +5,14 @@ keycloak:
   username: admin
   password: admin
   client-secret: 65Ixa4g6ltH6yhRwpbxkiGjpinGkFL8n
+
+kafka:
+  topic:
+    messageHub: message-hub
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/intelibank
